@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; background: #f8fafc; }
+        .request-card { 
+            background: white; 
+            padding: 15px; 
+            margin-bottom: 10px; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .info { flex-grow: 1; }
+        .name { font-weight: bold; font-size: 1.1rem; color: #1e293b; }
+        .apt { color: #64748b; font-size: 0.9rem; }
+        .resolve-btn { 
+            background: #22c55e; 
+            color: white; 
+            border: none; 
+            padding: 10px 15px; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            font-weight: bold;
+        }
+        .resolve-btn:hover { background: #16a34a; }
+        h1 { color: #334155; }
+    </style>
+</head>
+<body>
+   <div class="card">
+        <h1>Grocery Help</h1>
+        <input type="text" id="name" placeholder="Your Name"><br><br>
+        <input type="text" id="apt" placeholder="Apt #"><br><br>
+        <button onclick="saveRequest()">Send Request</button>
+    </div>
+
+    <script>
+        function saveRequest() {
+            const name = document.getElementById('name').value;
+            const apt = document.getElementById('apt').value;
+
+            // 1. Get existing requests or start with empty list
+            const existing = JSON.parse(localStorage.getItem('groceryRequests')) || [];
+            
+            // 2. Add new request
+            existing.push({ name, apt, time: new Date().toLocaleTimeString() });
+
+            // 3. Save back to LocalStorage
+            localStorage.setItem('groceryRequests', JSON.stringify(existing));
+
+            alert("Sent! Open the Dashboard tab to see it.");
+        }
+    </script>
+</body>
+</html>
