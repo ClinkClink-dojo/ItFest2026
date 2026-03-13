@@ -1,7 +1,9 @@
+html,body{
+  height: 100%;
+}
 body{
   background: linear-gradient(to bottom, #F3DFC1, #ecaa46);
     font-family: Arial, sans-serif;
-    height: 100%;
 }
 .h1{
      text-align: center;
