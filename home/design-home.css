@@ -14,4 +14,63 @@ body{
   font-weight: 900;
   font-style: normal;
   padding-top: 100px;
+   text-shadow: 2px 2px 2px rgb(255, 255, 255);
+}
+.div-intro{
+  background-color: rgba(89, 72, 45, 0.8);
+    color: white;
+    padding: 20px;
+    margin: 100px;
+    border-radius: 10px;
+    font-size: 18px;
+    line-height: 1.6;
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
+}
+.navbar {
+    background-color: #000000;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 0;
+    z-index: 1000;
+}
+
+.navbar ul {
+    list-style-type: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar li {
+    flex: 0 0 auto;
+}
+
+.navbar li.right {
+    margin-left: auto;
+}
+
+.navbar a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.navbar a:hover {
+    background-color: #928585;
+    color: #ffffff;
+    
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
