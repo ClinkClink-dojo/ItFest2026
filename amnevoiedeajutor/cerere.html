@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ro">
 <head>
@@ -7,13 +8,10 @@
     <style>
         body { font-family: 'Segoe UI', sans-serif; background: #fff7ed; padding: 20px; color: #431407; }
         .card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 15px rgba(0,0,0,0.1); max-width: 500px; margin: auto; border: 3px solid #fb923c; }
-        h1 { color: #ea580c; }
+        h1 { color: #ea580c; margin-top: 0; }
         label { display: block; text-align: left; font-weight: bold; margin-top: 15px; }
         input, select, textarea { width: 100%; padding: 12px; margin-top: 5px; border: 2px solid #fed7aa; border-radius: 10px; box-sizing: border-box; font-size: 1rem; }
-        
-        /* Secțiunea care va fi ascunsă/afișată */
         #sectiuneExtra { display: none; margin-top: 20px; border-top: 1px solid #fed7aa; padding-top: 10px; }
-        
         button.main-btn { background: #ea580c; color: white; border: none; width: 100%; padding: 18px; font-size: 1.2rem; border-radius: 12px; cursor: pointer; margin-top: 25px; font-weight: bold; }
         #map { height: 250px; width: 100%; border-radius: 10px; margin-top: 10px; border: 2px solid #fed7aa; }
     </style>
@@ -26,6 +24,9 @@
         <label>Nume Prenume:</label>
         <input type="text" id="nume" placeholder="Ex: Maria Popescu">
 
+        <label>Număr de Telefon:</label>
+        <input type="tel" id="telefon" placeholder="Ex: 0722 000 000">
+
         <label>Cum dorești să fii ajutat?</label>
         <select id="tipAjutor" onchange="toggleSectiune()">
             <option value="">-- Alege o variantă --</option>
@@ -37,9 +38,9 @@
             <label>Cu ce ai nevoie de ajutor? (scurt):</label>
             <textarea id="detaliiAjutor" rows="2" placeholder="Ex: Să duc gunoiul / Să urce plasele..."></textarea>
 
-            <label>Apasă pe hartă unde locuiești:</label>
+            <label>Caută adresa sau apasă pe hartă:</label>
+            <input type="text" id="adresaText" placeholder="Scrie strada și numărul">
             <div id="map"></div>
-            <input type="text" id="adresaText" placeholder="Scrie strada și numărul" style="margin-top:10px;">
         </div>
 
         <button class="main-btn" onclick="trimiteCerere()">Trimite Cererea</button>
@@ -52,89 +53,73 @@
         function toggleSectiune() {
             const tip = document.getElementById('tipAjutor').value;
             const sectiune = document.getElementById('sectiuneExtra');
-            
             if (tip === "În persoană") {
                 sectiune.style.display = "block";
-                initMap(); // Inițializăm harta când devine vizibilă
+                initMap();
             } else {
                 sectiune.style.display = "none";
             }
         }
 
-    function initMap() {
-    if (!map) {
-        map = L.map('map').setView([45.7489, 21.2087], 13);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 }).addTo(map);
+        function initMap() {
+            if (!map) {
+                map = L.map('map').setView([45.7489, 21.2087], 12);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 }).addTo(map);
 
-        // CLICK PE HARTĂ -> Pune Pin și scrie Adresa
-        map.on('click', function(e) {
-            plaseazaMarker(e.latlng.lat, e.latlng.lng, true);
-        });
-
-        // SCRIS ÎN CĂSUȚĂ -> Caută pe hartă și pune Pin
-        document.getElementById('adresaText').addEventListener('change', function() {
-            cautaAdresa(this.value);
-        });
-    }
-    setTimeout(() => { map.invalidateSize(); }, 200);
-}
-
-function plaseazaMarker(lat, lng, updateText) {
-    if (marker) map.removeLayer(marker);
-    marker = L.marker([lat, lng]).addTo(map);
-    coords = lat.toFixed(4) + ", " + lng.toFixed(4);
-
-    if (updateText) {
-        fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`)
-            .then(res => res.json())
-            .then(data => {
-                if (data.address) {
-                    const strada = data.address.road || "";
-                    const numar = data.address.house_number || "";
-                    document.getElementById('adresaText').value = strada + (numar ? " nr. " + numar : "");
-                }
-            });
-    }
-}
-
-function cautaAdresa(textAdresa) {
-    if (textAdresa.length < 3) return;
-
-    fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(textAdresa)}`)
-        .then(res => res.json())
-        .then(results => {
-            if (results.length > 0) {
-                const firstResult = results[0];
-                const lat = parseFloat(firstResult.lat);
-                const lon = parseFloat(firstResult.lon);
-
-                // Mutăm harta și punem pin-ul
-                map.setView([lat, lon], 16);
-                plaseazaMarker(lat, lon, false); // false pentru a nu suprascrie ce a scris omul
+                map.on('click', (e) => plaseazaMarker(e.latlng.lat, e.latlng.lng, true));
+                document.getElementById('adresaText').addEventListener('change', function() {
+                    cautaAdresa(this.value);
+                });
             }
-        });
-}
+            setTimeout(() => { map.invalidateSize(); }, 200);
+        }
+
+        function plaseazaMarker(lat, lng, updateText) {
+            if (marker) map.removeLayer(marker);
+            marker = L.marker([lat, lng]).addTo(map);
+            coords = lat.toFixed(4) + ", " + lng.toFixed(4);
+            if (updateText) {
+                fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.address) {
+                            const str = data.address.road || "";
+                            const nr = data.address.house_number || "";
+                            document.getElementById('adresaText').value = str + (nr ? " nr. " + nr : "");
+                        }
+                    });
+            }
+        }
+
+        function cautaAdresa(text) {
+            if (text.length < 3) return;
+            fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(text)}`)
+                .then(res => res.json())
+                .then(res => {
+                    if (res.length > 0) {
+                        const lat = parseFloat(res[0].lat), lon = parseFloat(res[0].lon);
+                        map.setView([lat, lon], 16);
+                        plaseazaMarker(lat, lon, false);
+                    }
+                });
+        }
 
         function trimiteCerere() {
             const nume = document.getElementById('nume').value;
+            const tel = document.getElementById('telefon').value;
             const tip = document.getElementById('tipAjutor').value;
-            
-            if(!nume || !tip) return alert("Te rugăm să completezi numele și tipul de ajutor!");
+            if(!nume || !tel || !tip) return alert("Completează datele de contact!");
 
             const cereri = JSON.parse(localStorage.getItem('groceryRequests')) || [];
-            
-            const nouaCerere = {
-                nume,
-                tip,
-                detalii: document.getElementById('detaliiAjutor').value || "Nespecificat",
-                adresa: document.getElementById('adresaText').value || "Doar telefonic",
+            cereri.push({
+                nume, tel, tip,
+                detalii: document.getElementById('detaliiAjutor').value || "N/A",
+                adresa: document.getElementById('adresaText').value || "Telefonic",
                 coords: coords,
                 ora: new Date().toLocaleTimeString('ro-RO', {hour: '2-digit', minute:'2-digit'})
-            };
-
-            cereri.push(nouaCerere);
+            });
             localStorage.setItem('groceryRequests', JSON.stringify(cereri));
-            alert("Cererea a fost trimisă!");
+            alert("Cerere trimisă!");
             location.reload();
         }
     </script>
