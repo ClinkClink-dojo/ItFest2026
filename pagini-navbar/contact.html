@@ -9,21 +9,21 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    /* Schimbat: min-height permite fundalului să se extindă dacă apare scroll */
+
     min-height: 100vh; 
     display: flex;
     justify-content: center;
     align-items: flex-start;
     padding-top: 40px;
     
-    /* Fundalul rămâne fix când dai scroll */
+
     background-attachment: fixed; 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     
     transition: background-image 1s ease-in-out;
-    background-color: #333; /* Culoare de rezervă în caz că imaginea nu se încarcă */
+    background-color: #333; 
 }
 
 .overlay{
@@ -95,7 +95,6 @@ margin-bottom:40px;
 
 <div class="container">
 
-<!-- FORMULAR INREGISTRARE -->
 <div class="section">
 <h2>Înregistrare Voluntar</h2>
 <form onsubmit="signupVolunteer(event)">
@@ -111,7 +110,7 @@ margin-bottom:40px;
 </form>
 </div>
 
-<!-- FORMULAR LOGIN -->
+
 <div class="section">
 <h2>Autentificare Voluntar</h2>
 <form onsubmit="loginVolunteer(event)">

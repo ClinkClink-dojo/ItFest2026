@@ -9,10 +9,10 @@
     
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
-        /* Păstrăm stilurile tale specifice pentru card și formular */
+        
         body { font-family: 'Segoe UI', sans-serif; background: #fff7ed; padding: 20px; color: #2d3436; }
         
-        /* Ajustăm marginea de sus pentru a nu intra sub navbar-ul fix */
+       
         .card { 
             background: white; 
             padding: 30px; 
@@ -24,6 +24,7 @@
         }
         
         h1 { color: #2c3e50; margin-top: 0; }
+        h2 { color: #34495e; margin-bottom: 20px; }
         label { display: block; text-align: left; font-weight: bold; margin-top: 15px; }
         input, select, textarea { width: 100%; padding: 12px; margin-top: 5px; border: 2px solid #27ae60; border-radius: 10px; box-sizing: border-box; font-size: 1rem; }
         #sectiuneExtra { display: none; margin-top: 20px; border-top: 1px solid #27ae60; padding-top: 10px; }
@@ -33,7 +34,7 @@
         
         #map { height: 250px; width: 100%; border-radius: 10px; margin-top: 10px; border: 2px solid #27ae60; }
 
-        /* Stil pentru butonul de microfon (AI Feature) */
+       
         .voice-header { display: flex; align-items: center; justify-content: space-between; margin-top: 15px; }
         #btnVoce { width: auto; padding: 5px 15px; background: #27ae60; font-size: 0.9rem; margin: 0; border-radius: 8px; color: white; border: none; cursor: pointer; font-weight: bold; }
     </style>
@@ -50,7 +51,8 @@
     </nav>
 
     <div class="card">
-        <h1>Ajutor Vecini</h1>
+        <h1>Completează acest formular</h1>
+        <h2>Un voluntar vă va contacta în curând</h2>
         
         <label>Nume Prenume:</label>
         <input type="text" id="nume" placeholder="Ex: Maria Popescu">
