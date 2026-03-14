@@ -9,16 +9,16 @@ html, body {
 }
 
 body {
-    /* Fundal mai calm și profesionist */
+   
     background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     color: #2d3436;
     line-height: 1.8;
 }
 
-/* Navigație Modernizată */
+
 .navbar {
-    background-color: #2c3e50; /* Un albastru închis, mai cald decât negrul pur */
+    background-color: #2c3e50; 
     position: fixed;
     top: 0;
     width: 100%;
@@ -45,7 +45,7 @@ body {
 }
 
 .navbar a:hover, .navbar a.active {
-    background-color: #27ae60; /* Verde pentru acțiune/încredere */
+    background-color: #27ae60; 
     color: white;
 }
 
@@ -53,11 +53,11 @@ body {
     margin-left: auto;
 }
 
-/* Titlul Principal */
+
 .h1 {
     text-align: center;
     color: #2c3e50;
-    font-size: 80px; /* Redus puțin pentru echilibru */
+    font-size: 80px;
     font-family: "Playfair Display", serif;
     font-weight: 900;
     padding-top: 140px;
@@ -65,7 +65,7 @@ body {
     text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
 }
 
-/* Containerul de conținut */
+
 .div-intro {
     background-color: #ffffff;
     color: #2d3436;
@@ -73,11 +73,11 @@ body {
     margin: 40px auto;
     max-width: 900px;
     border-radius: 20px;
-    font-size: 20px; /* Text mai mare pentru seniori */
+    font-size: 20px; 
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     opacity: 0;
     animation: fadeIn 1.2s ease-out forwards;
-    border-left: 8px solid #27ae60; /* Accent vizual */
+    border-left: 8px solid #27ae60; 
 }
 
 .div-intro b {
@@ -85,7 +85,7 @@ body {
     font-size: 22px;
 }
 
-/* Animație */
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -97,7 +97,7 @@ body {
     }
 }
 
-/* Responsivitate de bază */
+
 @media (max-width: 768px) {
     .h1 { font-size: 50px; }
     .div-intro { margin: 20px; padding: 25px; }
