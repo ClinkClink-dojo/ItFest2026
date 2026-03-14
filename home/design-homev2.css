@@ -18,41 +18,69 @@ body {
 
 
 .navbar {
-    background-color: #2c3e50; 
     position: fixed;
-    top: 0;
+    top: 30px; 
+    left: 0;
+    right: 0;
     width: 100%;
+    display: flex;
+    justify-content: center;
     z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    /* Înclinăm ușor toată "pastila" pentru un efect dinamic */
+    transform: rotate(-4deg); 
+}
+
+/* Pastila bicoloră */
+.nav-container {
+    width: auto;
+    min-width: 320px;
+    /* Gradient brusc: 50% verde, 50% alb/transparent */
+    background: linear-gradient(to right, #27ae60 50%, rgba(255, 255, 255, 0.9) 50%);
+    border-radius: 50px; /* Formă perfectă de pastilă */
+    padding: 5px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .navbar ul {
     list-style-type: none;
     display: flex;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
 }
 
-.navbar a {
-    display: block;
-    color: #ecf0f1;
-    text-align: center;
-    padding: 18px 25px;
+.navbar li {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+/* Stil pentru butonul "Home" (pe partea verde) */
+.nav-link-home {
+    color: white !important;
+    font-weight: 700;
     text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
+    padding: 12px 30px;
+    transition: transform 0.2s ease;
 }
 
-.navbar a:hover, .navbar a.active {
-    background-color: #27ae60; 
-    color: white;
+/* Stil pentru butonul "Sign In" (pe partea albă) */
+.nav-link-signin {
+    color: #27ae60 !important;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 12px 30px;
+    transition: transform 0.2s ease;
 }
 
-.navbar li.right {
-    margin-left: auto;
+/* Efect de plutire la hover pentru ambele */
+.navbar a:hover {
+    transform: scale(1.05);
 }
 
+<<<<<<< Updated upstream
 .navbar li.left {
     background-color: #2c3e50; 
     position: fixed;
@@ -69,6 +97,8 @@ body {
 }
 
 
+=======
+>>>>>>> Stashed changes
 .h1 {
     text-align: center;
     color: #2c3e50;
