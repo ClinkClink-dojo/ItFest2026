@@ -66,6 +66,24 @@ body{
     
 }
 
+#sign-in {
+    background-color: transparent;
+    border: none;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+#sign-in:hover {
+    background-color: #928585;
+    color: #ffffff;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
