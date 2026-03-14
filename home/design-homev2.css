@@ -26,6 +26,49 @@ body {
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
+.sign-in-btn {
+    position: fixed;
+    top: 16px;
+    right: 20px;
+    background: #27ae60;
+    color: #ffffff;
+    padding: 12px 18px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.14);
+    transition: background 0.2s ease;
+    z-index: 1001;
+}
+
+.sign-in-btn:hover {
+    background: #1e8449;
+}
+.big-green-btn {
+    display: block;
+    background: #27ae60;
+    color: white;
+    padding: 20px 40px;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 15px;
+    text-align: center;
+    margin: 30px auto;
+    width: fit-content;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: background 0.3s ease;
+}
+
+.big-green-btn:hover {
+    background: #1e8449;
+}
+.request-form-section {
+    margin: 50px auto 80px;
+    max-width: 920px;
+    padding: 0 20px;
+}
+
 .navbar ul {
     list-style-type: none;
     display: flex;
@@ -100,6 +143,68 @@ body {
     font-size: 22px;
 }
 
+/* Form design (matching the original cerere.html styling) */
+.request-form-section .card {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+    max-width: 500px;
+    margin: auto;
+    border: 3px solid #fb923c;
+}
+
+.request-form-section h1 {
+    color: #ea580c;
+    margin-top: 0;
+}
+
+.request-form-section label {
+    display: block;
+    text-align: left;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.request-form-section input,
+.request-form-section select,
+.request-form-section textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border: 2px solid #fed7aa;
+    border-radius: 10px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+.request-form-section #sectiuneExtra {
+    display: none;
+    margin-top: 20px;
+    border-top: 1px solid #fed7aa;
+    padding-top: 10px;
+}
+
+.request-form-section button.main-btn {
+    background: #ea580c;
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 18px;
+    font-size: 1.2rem;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-top: 25px;
+    font-weight: bold;
+}
+
+.request-form-section #map {
+    height: 250px;
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 10px;
+    border: 2px solid #fed7aa;
+}
 
 @keyframes fadeIn {
     from {
