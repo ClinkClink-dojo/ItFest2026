@@ -28,14 +28,13 @@ body {
     display: flex;
     justify-content: center;
     z-index: 1000;
-    /* Înclinație ușoară pentru un aspect jucăuș și unic */
     transform: rotate(-1.5deg);
 }
 
 .nav-container {
     width: auto;
     min-width: 320px;
-    /* Gradient brusc la 50% pentru a crea aspectul de pastilă farmaceutică */
+    
     background: linear-gradient(to right, #27ae60 50%, rgba(255, 255, 255, 0.9) 50%);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
@@ -61,7 +60,7 @@ body {
     justify-content: center;
 }
 
-/* Stil general link-uri (butoane) */
+
 .navbar a {
     display: block;
     text-align: center;
@@ -73,23 +72,23 @@ body {
     width: 100%;
 }
 
-/* Partea Stângă (Verde): Link-ul Home */
+
 .nav-link-home {
     color: #ffffff !important;
 }
 
-/* Partea Dreaptă (Albă): Link-ul Sign In */
+
 .nav-link-signin {
     color: #27ae60 !important;
 }
 
-/* Efect de hover: butoanele pulsează ușor */
+
 .navbar a:hover {
     transform: scale(1.05);
     letter-spacing: 0.5px;
 }
 
-/* Ajustare pentru ecrane mici (mobile) */
+
 @media (max-width: 480px) {
     .nav-container {
         min-width: 280px;
@@ -108,6 +107,16 @@ body {
     font-family: "Playfair Display", serif;
     font-weight: 900;
     padding-top: 140px;
+    margin-bottom:0px;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+}
+.h2 {
+    text-align: center;
+    color: #2c3e50;
+    font-size: 50px;
+    font-family: "Playfair Display", serif;
+    font-weight: 900;
+    
     margin-bottom: 20px;
     text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
 }
@@ -132,7 +141,7 @@ body {
     font-size: 22px;
 }
 
-/* Form design (matching the original cerere.html styling) */
+
 .request-form-section .card {
     background: white;
     padding: 30px;
@@ -212,114 +221,67 @@ body {
     .div-intro { margin: 20px; padding: 25px; }
 }
 .big-green-btn {
-    display: block; /* Ocupă tot rândul pentru a fi ușor de țintit */
-    max-width: 600px; /* Lățime maximă pentru a nu fi absurd de mare pe ecrane imense */
-    margin: 60px auto; /* Spațiu mare sus-jos și centrare orizontală */
-    padding: 25px 40px; /* Padding generos pentru o suprafață mare de click */
-    background-color: #27ae60; /* Verde vibrant, similar cu navbar-ul */
-    color: #ffffff !important; /* Text alb curat pentru contrast maxim */
+    display: block; 
+    margin: 60px auto; 
+    padding: 25px 40px; 
+    background-color: #27ae60; 
+    color: #ffffff !important; 
     text-align: center;
-    text-decoration: none; /* Elimină sublinierea link-ului */
-    font-size: 32px; /* Font FOARTE mare pentru vizibilitate */
-    font-weight: 900; /* Text foarte îngroșat */
-    border-radius: 15px; /* Margini ușor rotunjite pentru un aspect prietenos */
-    box-shadow: 0 10px 20px rgba(39, 174, 96, 0.4); /* Umbră colorată pentru efect 3D */
-    transition: all 0.3s ease; /* Animație lină la hover */
+    text-decoration: none; 
+    font-size: 32px; 
+    font-weight: 900; 
+    border-radius: 15px; 
+    box-shadow: 0 10px 20px rgba(39, 174, 96, 0.4); 
+    transition: all 0.3s ease; 
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     border: none;
     cursor: pointer;
 }
 
-/* Efect la trecerea cursorului (Hover) */
+
 .big-green-btn:hover {
-    background-color: #2ecc71; /* Verde și mai luminos */
-    box-shadow: 0 15px 30px rgba(39, 174, 96, 0.6); /* Umbră mai intensă */
-    transform: translateY(-3px) scale(1.02); /* Se ridică și se mărește ușor */
+    background-color: #2ecc71; 
+    box-shadow: 0 15px 30px rgba(39, 174, 96, 0.6); 
+    transform: translateY(-3px) scale(1.02); 
 }
 
-/* Efect la click (Active) */
+
 .big-green-btn:active {
-    transform: translateY(1px); /* Efect de apăsare */
+    transform: translateY(1px); 
     box-shadow: 0 5px 10px rgba(39, 174, 96, 0.4);
 }
+
 .site-footer {
-  background: rgba(44, 62, 80, 0.95);
-  color: #f1f2f6;
-  padding: 40px 20px 20px;
-  font-size: 14px;
-  letter-spacing: 0.02em;
+    background: rgba(44, 62, 80, 0.95);
+    color: #f1f2f6;
+    padding: 40px 20px;
+    font-size: 14px;
+    display: flex;             
+    justify-content: center;   
+    gap: 40px;                 
+    flex-wrap: wrap;           
 }
 
-.footer-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 30px;
-  justify-content: space-between;
-  align-items: flex-start;
-  overflow-x: auto;
-  padding-bottom: 10px;
+
+.footer-info {
+    flex: 1;
+    min-width: 250px;
+    max-width: 400px;
 }
 
-.footer-left,
-.footer-center,
-.footer-right {
-  min-width: 220px;
-  flex: 1;
+
+#footer-map {
+    width: 400px;
+    height: 250px;
+    border-radius: 15px;
+    border: 3px solid #27ae60; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    z-index: 1; 
 }
 
-.footer-left p,
-.footer-center p,
-.footer-right p {
-  margin: 8px 0;
-  line-height: 1.6;
-}
 
-.footer-left strong,
-.footer-center strong,
-.footer-right strong {
-  font-size: 16px;
-  color: #fdfbfb;
-}
-
-.footer-center a,
-.footer-right a {
-  color: #27ae60;
-  text-decoration: none;
-}
-
-.footer-center a:hover,
-.footer-right a:hover {
-  text-decoration: underline;
-}
-
-.footer-socials {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.footer-bottom {
-  max-width: 1100px;
-  margin: 18px auto 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 16px;
-  text-align: center;
-  color: rgba(241, 242, 246, 0.8);
-  font-size: 13px;
-}
-
-@media (max-width: 720px) {
-  .footer-inner {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .footer-left,
-  .footer-center,
-  .footer-right {
-    max-width: 100%;
-  }
+@media (max-width: 768px) {
+    #footer-map {
+        width: 100%; 
+    }
 }

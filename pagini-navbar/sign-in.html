@@ -6,24 +6,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Portal Voluntari</title>
 <style>
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    /* Schimbat: min-height permite fundalului să se extindă dacă apare scroll */
-    min-height: 100vh; 
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding-top: 40px;
-    
-    /* Fundalul rămâne fix când dai scroll */
-    background-attachment: fixed; 
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    
-    transition: background-image 1s ease-in-out;
-    background-color: #333; /* Culoare de rezervă în caz că imaginea nu se încarcă */
+body{
+font-family: Arial, sans-serif;
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:flex-start;
+padding-top:40px;
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+transition:background-image 1s ease-in-out;
 }
 
 .overlay{
@@ -51,13 +45,12 @@ text-align:center;
 margin-bottom:15px;
 }
 
-input {
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box; 
+input{
+width:100%;
+padding:10px;
+margin:8px 0;
+border:1px solid #ccc;z
+border-radius:5px;
 }
 
 button{
@@ -82,11 +75,11 @@ margin-bottom:40px;
 </style>
 </head>
 <body>
-     <nav class="navbar">
+<nav class="navbar">
     <div class="nav-container">
         <ul> 
-            <li><a href="../home/homepage.html" class="nav-link-home">Home</a></li>
-            <li><a href="#" class="nav-link-signin">Sign In</a></li>
+            <li><a href="./homepage.html" class="nav-link-home">Home</a></li>
+            <li><a href="../pagini-navbar/contact.html" class="nav-link-signin">Sign In</a></li>
         </ul>
     </div>
 </nav>

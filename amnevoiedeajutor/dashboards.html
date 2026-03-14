@@ -12,16 +12,47 @@
         .card.urgent { border-left-color: #ef4444; }
         .tel-link { color: #ea580c; font-weight: bold; text-decoration: none; font-size: 1.1rem; }
         .btn-done { width: 100%; background: #22c55e; color: white; border: none; padding: 10px; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 10px; }
-        .goback { display: inline-block; margin:auto    ; color: white; text-decoration: none; font-weight: bold; background-color:#22c55e }
+        .goback {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    color: #475569; 
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.goback:hover {
+    background-color: #f8fafc;
+    color: #1e293b;
+    border-color: #94a3b8;
+    transform: translateX(-3px);
+}
+
+
+h2 {
+    color: #1e293b;
+    margin-top: 10px;
+    font-size: 1.5rem;
+}
     </style>
 </head>
 <body>
 
     <div id="lista">
-        <a href="../home/homepage.html" class="goback">Home</a>
-        <h2>Solicitări Active</h2>
-        <div id="continut"></div>
-    </div>
+    <a href="../home/homepage-voluntar.html" class="goback">
+        <span>←</span> Înapoi la Home
+    </a>
+    <h2>Solicitări Active</h2>
+    <div id="continut"></div>
+</div>
     <div id="mapFull"></div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
