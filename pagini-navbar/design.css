@@ -11,7 +11,7 @@
     z-index: 1000;
     justify-content:flex-start;
     /* Înclinație ușoară pentru un aspect jucăuș și unic */
-    transform: rotate(-1.5deg);
+    
 }
 
 .nav-container {
