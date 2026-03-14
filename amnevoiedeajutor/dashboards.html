@@ -7,97 +7,152 @@
     <style>
         body { font-family: sans-serif; display: flex; height: 100vh; margin: 0; background: #f1f5f9; }
         #lista { width: 380px; overflow-y: auto; padding: 20px; border-right: 2px solid #cbd5e1; box-sizing: border-box; }
-        #mapFull { flex-grow: 1; }
+        #mapFull { flex-grow: 1; position: relative; }
         .card { background: white; padding: 15px; margin-bottom: 15px; border-radius: 12px; border-left: 8px solid #3b82f6; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
         .card.urgent { border-left-color: #ef4444; }
         .tel-link { color: #ea580c; font-weight: bold; text-decoration: none; font-size: 1.1rem; }
         .btn-done { width: 100%; background: #22c55e; color: white; border: none; padding: 10px; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 10px; }
+        
         .goback {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 18px;
-    margin-bottom: 20px;
-    background-color: #ffffff;
-    color: #475569; 
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.9rem;
-    border-radius: 8px;
-    border: 1px solid #cbd5e1;
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            margin-bottom: 20px;
+            background-color: #ffffff;
+            color: #475569; 
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            transition: all 0.2s ease;
+        }
 
-.goback:hover {
-    background-color: #f8fafc;
-    color: #1e293b;
-    border-color: #94a3b8;
-    transform: translateX(-3px);
-}
+        /* Stiluri pentru culorile markerelor resurselor */
+        .marker-spital { filter: hue-rotate(140deg) brightness(0.8); }    /* Roșu intens */
+        .marker-farmacie { filter: hue-rotate(200deg); }                /* Albastru */
+        .marker-supermarket { filter: hue-rotate(60deg); }              /* Galben/Portocaliu */
+        .marker-sediu { filter: hue-rotate(250deg) brightness(1.2); }    /* Verde vibrant */
 
-
-h2 {
-    color: #1e293b;
-    margin-top: 10px;
-    font-size: 1.5rem;
-}
+        /* Legenda poziționată peste hartă */
+        #legenda-harta {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            border: 2px solid #27ae60;
+            font-size: 13px;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
     </style>
 </head>
 <body>
 
-    <div id="lista">
+<div id="lista">
     <a href="../home/homepage-voluntar.html" class="goback">
         <span>←</span> Înapoi la Home
     </a>
     <h2>Solicitări Active</h2>
     <div id="continut"></div>
 </div>
-    <div id="mapFull"></div>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script>
-        let dashMap = L.map('mapFull').setView([45.7489, 21.2087], 13);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(dashMap);
-        let markers = [];
+<div id="mapFull">
+    <div id="legenda-harta">
+        <strong>📍 Resurse Utile:</strong><br>
+        <span style="color: #e74c3c;">●</span> Spital (Urgențe)<br>
+        <span style="color: #dbc234;">●</span> Farmacie<br>
+        <span style="color: #c40ff1;">●</span> Supermarket<br>
+        <span style="color: #27ae60;">●</span> Sediul SeniorLink
+    </div>
+</div>
 
-        function randeaza() {
-            const cereri = JSON.parse(localStorage.getItem('groceryRequests')) || [];
-            const container = document.getElementById('continut');
-            container.innerHTML = "";
-            markers.forEach(m => dashMap.removeLayer(m));
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+    // Inițializare Hartă
+    let dashMap = L.map('mapFull').setView([45.7489, 21.2087], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(dashMap);
+    
+    let markers = [];
 
-            cereri.forEach((c, index) => {
-                const isUrgent = c.tip === "În persoană";
-                container.innerHTML += `
-                    <div class="card ${isUrgent ? 'urgent' : ''}">
-                        <strong>${c.nume}</strong> <small>(${c.ora})</small><br>
-                        <a href="tel:${c.tel}" class="tel-link">📞 ${c.tel}</a><br>
-                        <b>Tip:</b> ${c.tip}<br>
-                        ${isUrgent ? `<div style="background:#f1f5f9;padding:5px;margin:5px 0;">${c.detalii}</div>` : ''}
-                        <p style="font-size:0.8rem">📍 ${c.adresa}</p>
-                        <button class="btn-done" onclick="rezolva(${index})">Rezolvat</button>
-                    </div>
-                `;
+    // 1. Definim locațiile resurselor
+    const resurseUtile = [
+        { nume: "Spitalul Județean", tip: "spital", coords: [45.7411, 21.2421] },
+        { nume: "Spitalul Militar", tip: "spital", coords: [45.757084348847386, 21.225061456880937] },
+        { nume: "Spitalul Municipal", tip: "spital", coords: [45.75933689403906, 21.22687896354529] },
+        { nume: "Spitalul de Boli Infectioase", tip: "spital", coords: [45.769036073458835, 21.25965536548905] },
+        { nume: "Farmacia HelpNet Non-Stop", tip: "farmacie", coords: [45.7540, 21.2255] },
+        { nume: "Farmacia Tonica", tip: "farmacie", coords: [45.76316862735653, 21.248119636410056] },
+        { nume: "Farmacia Dona", tip: "farmacie", coords: [45.73437384870633, 21.200340517946973] },
+        { nume: "Supermarket Profi", tip: "supermarket", coords: [45.7500, 21.2100] },
+        { nume: "Auchan", tip: "supermarket", coords: [45.7667679223308, 21.228277726585077] },
+        { nume: "Supermarket Profi City", tip: "supermarket", coords: [45.748977675603356, 21.23973874939953] },
+        { nume: "Sediul SeniorLink", tip: "sediu", coords: [45.7685, 21.2465] }
+    ];
 
-                if(c.coords) {
-                    const l = c.coords.split(",");
-                    const m = L.marker([l[0], l[1]]).addTo(dashMap)
-                               .bindPopup(`<b>${c.nume}</b><br>${c.tel}<br>${c.detalii}`);
-                    markers.push(m);
-                }
-            });
-        }
+    // 2. Funcție pentru a adăuga resursele pe hartă
+    function incarcaResurse() {
+        resurseUtile.forEach(loc => {
+            const mResursa = L.marker(loc.coords).addTo(dashMap);
+            
+            // Aplicăm culorile imediat ce pictograma este creată
+            if (mResursa._icon) {
+                if (loc.tip === "spital") mResursa._icon.classList.add("marker-spital");
+                if (loc.tip === "farmacie") mResursa._icon.classList.add("marker-farmacie");
+                if (loc.tip === "supermarket") mResursa._icon.classList.add("marker-supermarket");
+                if (loc.tip === "sediu") mResursa._icon.classList.add("marker-sediu");
+            }
+            
+            mResursa.bindPopup(`<b>${loc.tip.toUpperCase()}</b><br>${loc.nume}`);
+        });
+    }
 
-        function rezolva(index) {
-            let cereri = JSON.parse(localStorage.getItem('groceryRequests')) || [];
-            cereri.splice(index, 1);
-            localStorage.setItem('groceryRequests', JSON.stringify(cereri));
-            randeaza();
-        }
+    // Apelăm încărcarea resurselor imediat
+    incarcaResurse();
 
-        setInterval(randeaza, 4000);
+    function randeaza() {
+        const cereri = JSON.parse(localStorage.getItem('groceryRequests')) || [];
+        const container = document.getElementById('continut');
+        container.innerHTML = "";
+        
+        // Ștergem doar markerii de cereri, nu și resursele fixe
+        markers.forEach(m => dashMap.removeLayer(m));
+        markers = [];
+
+        cereri.forEach((c, index) => {
+            const isUrgent = c.tip === "În persoană";
+            container.innerHTML += `
+                <div class="card ${isUrgent ? 'urgent' : ''}">
+                    <strong>${c.nume}</strong> <small>(${c.ora})</small><br>
+                    <a href="tel:${c.tel}" class="tel-link">📞 ${c.tel}</a><br>
+                    <b>Tip:</b> ${c.tip}<br>
+                    ${isUrgent ? `<div style="background:#f1f5f9;padding:5px;margin:5px 0;">${c.detalii}</div>` : ''}
+                    <p style="font-size:0.8rem">📍 ${c.adresa}</p>
+                    <button class="btn-done" onclick="rezolva(${index})">Rezolvat</button>
+                </div>
+            `;
+
+            if(c.coords) {
+                const l = c.coords.split(",");
+                const m = L.marker([l[0], l[1]]).addTo(dashMap)
+                           .bindPopup(`<b>Cerere: ${c.nume}</b><br>${c.detalii}`);
+                markers.push(m);
+            }
+        });
+    }
+
+    function rezolva(index) {
+        let cereri = JSON.parse(localStorage.getItem('groceryRequests')) || [];
+        cereri.splice(index, 1);
+        localStorage.setItem('groceryRequests', JSON.stringify(cereri));
         randeaza();
-    </script>
+    }
+
+    setInterval(randeaza, 4000);
+    randeaza();
+</script>
 </body>
 </html>
