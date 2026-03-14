@@ -2,13 +2,45 @@
 <html lang="ro">
 <head>
     <meta charset="UTF-8">
-    <title>Panou Voluntar</title>
+    <title>Panou Voluntar - Gamified</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
         body { font-family: sans-serif; display: flex; height: 100vh; margin: 0; background: #f1f5f9; }
         #lista { width: 380px; overflow-y: auto; padding: 20px; border-right: 2px solid #cbd5e1; box-sizing: border-box; }
         #mapFull { flex-grow: 1; position: relative; }
-        .card { background: white; padding: 15px; margin-bottom: 15px; border-radius: 12px; border-left: 8px solid #27ae60; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        
+        /* Gamification Styles */
+        .stats-panel {
+            background: #22c55e;
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(19, 17, 17, 0.1);
+        }
+        .level-badge {
+            background: #f59e0b;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+        .progress-container {
+            background: #ffffff;
+            height: 12px;
+            border-radius: 10px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        #progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #eced8c, #ea580c);
+            transition: width 0.5s ease-in-out;
+        }
+        .xp-text { font-size: 0.75rem; color: #cbd5e1; margin-top: 5px; display: block; }
+
+        .card { background: white; padding: 15px; margin-bottom: 15px; border-radius: 12px; border-left: 8px solid #27ae60; box-shadow: 0 4px 6px rgba(35, 31, 31, 0.05); }
         .card.urgent { border-left-color: #ef4444; }
         .tel-link { color: #ea580c; font-weight: bold; text-decoration: none; font-size: 1.1rem; }
         .btn-done { width: 100%; background: #22c55e; color: white; border: none; padding: 10px; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 10px; }
@@ -29,6 +61,8 @@
             transition: all 0.2s ease;
         }
 
+<<<<<<< HEAD
+=======
         
         .marker-spital { filter: hue-rotate(140deg) brightness(0.8); }    /* Roșu intens */
         .marker-farmacie { filter: hue-rotate(200deg); }                /* Albastru */
@@ -36,6 +70,7 @@
         .marker-sediu { filter: hue-rotate(250deg) brightness(1.2); }    /* Verde vibrant */
 
         /* Legenda poziționată peste hartă */
+>>>>>>> b96f6b43e4d3093e645d549036f33aa657e062a2
         #legenda-harta {
             position: absolute;
             bottom: 20px;
@@ -48,6 +83,11 @@
             z-index: 1000;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
+
+        .marker-spital { filter: hue-rotate(140deg) brightness(0.8); }
+        .marker-farmacie { filter: hue-rotate(200deg); }
+        .marker-supermarket { filter: hue-rotate(60deg); }
+        .marker-sediu { filter: hue-rotate(250deg) brightness(1.2); }
     </style>
 </head>
 <body>
@@ -56,6 +96,18 @@
     <a href="../home/homepage-voluntar.html" class="goback">
         <span>←</span> Înapoi la Home
     </a>
+
+    <div class="stats-panel">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-weight: bold;">Eroul Zilei</span>
+            <span class="level-badge" id="level-display">Nivel 1</span>
+        </div>
+        <div class="progress-container">
+            <div id="progress-bar"></div>
+        </div>
+        <span class="xp-text" id="xp-display">0 / 5 misiuni până la nivelul următor</span>
+    </div>
+
     <h2>Solicitări Active</h2>
     <div id="continut"></div>
 </div>
@@ -72,13 +124,45 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-    // Inițializare Hartă
+    // --- GAMIFICATION LOGIC ---
+    const MAX_XP = 5; // Misiuni necesare per nivel
+
+    function actualizeazaStatistici() {
+        let xp = parseInt(localStorage.getItem('volunteerXP')) || 0;
+        let nivel = Math.floor(xp / MAX_XP) + 1;
+        let xpInNivel = xp % MAX_XP;
+        
+        let procent = (xpInNivel / MAX_XP) * 100;
+        
+        document.getElementById('progress-bar').style.width = procent + "%";
+        document.getElementById('level-display').innerText = "Nivel " + nivel;
+        document.getElementById('xp-display').innerText = `${xpInNivel} / ${MAX_XP} misiuni până la nivelul următor`;
+    }
+
+    function adaugaXP() {
+    let xp = parseInt(localStorage.getItem('volunteerXP')) || 0;
+    let noulXP = xp + 1;
+    localStorage.setItem('volunteerXP', noulXP);
+    
+    // Calculăm nivelul după adăugarea XP-ului
+    let nivelNou = Math.floor(noulXP / MAX_XP) + 1;
+
+    // Verificăm dacă a trecut de nivelul 3
+    if (nivelNou >= 4) {
+        alert("Felicitări! Ai demonstrat un devotament incredibil. Te redirecționăm către pagina Despre Noi!");
+        // Pune aici link-ul tău către pagina despre noi
+        window.location.href = "../pagini-navbar/aboutus.html"; 
+    } else {
+        actualizeazaStatistici();
+    }
+}
+    // ---------------------------
+
     let dashMap = L.map('mapFull').setView([45.7489, 21.2087], 13);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(dashMap);
     
     let markers = [];
 
-    // 1. Definim locațiile resurselor
     const resurseUtile = [
         { nume: "Spitalul Județean", tip: "spital", coords: [45.7411, 21.2421] },
         { nume: "Spitalul Militar", tip: "spital", coords: [45.757084348847386, 21.225061456880937] },
@@ -93,24 +177,19 @@
         { nume: "Sediul SeniorLink", tip: "sediu", coords: [45.7685, 21.2465] }
     ];
 
-    // 2. Funcție pentru a adăuga resursele pe hartă
     function incarcaResurse() {
         resurseUtile.forEach(loc => {
             const mResursa = L.marker(loc.coords).addTo(dashMap);
-            
-            // Aplicăm culorile imediat ce pictograma este creată
             if (mResursa._icon) {
                 if (loc.tip === "spital") mResursa._icon.classList.add("marker-spital");
                 if (loc.tip === "farmacie") mResursa._icon.classList.add("marker-farmacie");
                 if (loc.tip === "supermarket") mResursa._icon.classList.add("marker-supermarket");
                 if (loc.tip === "sediu") mResursa._icon.classList.add("marker-sediu");
             }
-            
             mResursa.bindPopup(`<b>${loc.tip.toUpperCase()}</b><br>${loc.nume}`);
         });
     }
 
-    // Apelăm încărcarea resurselor imediat
     incarcaResurse();
 
     function randeaza() {
@@ -118,7 +197,6 @@
         const container = document.getElementById('continut');
         container.innerHTML = "";
         
-        // Ștergem doar markerii de cereri, nu și resursele fixe
         markers.forEach(m => dashMap.removeLayer(m));
         markers = [];
 
@@ -148,9 +226,14 @@
         let cereri = JSON.parse(localStorage.getItem('groceryRequests')) || [];
         cereri.splice(index, 1);
         localStorage.setItem('groceryRequests', JSON.stringify(cereri));
+        
+        // Gamification trigger
+        adaugaXP();
         randeaza();
     }
 
+    // Inițializare la încărcare
+    actualizeazaStatistici();
     setInterval(randeaza, 4000);
     randeaza();
 </script>
