@@ -10,7 +10,9 @@ html, body {
 
 body {
     padding-top: 70px;
-    background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+     background-image: url('oldman.webp');
+    background-size: cover;
+    background-attachment: fixed;
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     color: #2d3436;
     line-height: 1.8;
@@ -239,4 +241,85 @@ body {
 .big-green-btn:active {
     transform: translateY(1px); /* Efect de apăsare */
     box-shadow: 0 5px 10px rgba(39, 174, 96, 0.4);
+}
+.site-footer {
+  background: rgba(44, 62, 80, 0.95);
+  color: #f1f2f6;
+  padding: 40px 20px 20px;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+}
+
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 30px;
+  justify-content: space-between;
+  align-items: flex-start;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+.footer-left,
+.footer-center,
+.footer-right {
+  min-width: 220px;
+  flex: 1;
+}
+
+.footer-left p,
+.footer-center p,
+.footer-right p {
+  margin: 8px 0;
+  line-height: 1.6;
+}
+
+.footer-left strong,
+.footer-center strong,
+.footer-right strong {
+  font-size: 16px;
+  color: #fdfbfb;
+}
+
+.footer-center a,
+.footer-right a {
+  color: #27ae60;
+  text-decoration: none;
+}
+
+.footer-center a:hover,
+.footer-right a:hover {
+  text-decoration: underline;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.footer-bottom {
+  max-width: 1100px;
+  margin: 18px auto 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 16px;
+  text-align: center;
+  color: rgba(241, 242, 246, 0.8);
+  font-size: 13px;
+}
+
+@media (max-width: 720px) {
+  .footer-inner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-left,
+  .footer-center,
+  .footer-right {
+    max-width: 100%;
+  }
 }
