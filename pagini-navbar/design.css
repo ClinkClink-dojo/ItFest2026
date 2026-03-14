@@ -1,35 +1,83 @@
+/* --- NAVBAR STIL PASTILĂ BICOLORĂ --- */
+
 .navbar {
-    background-color: #2c3e50; 
     position: fixed;
-    top: 0;
+    top: 0px; 
+    left: 0;
+    right: 0px;
     width: 100%;
+    display: flex;
+    justify-content: center;
     z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    justify-content:flex-start;
+    /* Înclinație ușoară pentru un aspect jucăuș și unic */
+    transform: rotate(-1.5deg);
+}
+
+.nav-container {
+    width: auto;
+    min-width: 320px;
+    /* Gradient brusc la 50% pentru a crea aspectul de pastilă farmaceutică */
+    background: linear-gradient(to right, #27ae60 50%, rgba(255, 255, 255, 0.9) 50%);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 50px;
+    padding: 4px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    overflow: hidden;
 }
 
 .navbar ul {
     list-style-type: none;
     display: flex;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
 }
 
+.navbar li {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+/* Stil general link-uri (butoane) */
 .navbar a {
     display: block;
-    color: #ecf0f1;
     text-align: center;
-    padding: 18px 25px;
+    padding: 12px 35px;
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 700;
+    font-size: 16px;
     transition: all 0.3s ease;
+    width: 100%;
 }
 
-.navbar a:hover, .navbar a.active {
-    background-color: #27ae60; 
-    color: white;
+/* Partea Stângă (Verde): Link-ul Home */
+.nav-link-home {
+    color: #ffffff !important;
 }
 
-.navbar li.right {
-    margin-left: auto;
+/* Partea Dreaptă (Albă): Link-ul Sign In */
+.nav-link-signin {
+    color: #27ae60 !important;
+}
+
+/* Efect de hover: butoanele pulsează ușor */
+.navbar a:hover {
+    transform: scale(1.05);
+    letter-spacing: 0.5px;
+}
+
+/* Ajustare pentru ecrane mici (mobile) */
+@media (max-width: 480px) {
+    .nav-container {
+        min-width: 280px;
+    }
+    .navbar a {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
 }
