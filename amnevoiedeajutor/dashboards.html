@@ -185,34 +185,38 @@
     incarcaResurse();
 
     function randeaza() {
-        const cereri = JSON.parse(localStorage.getItem('groceryRequests')) || [];
-        const container = document.getElementById('continut');
-        container.innerHTML = "";
+    const cereri = JSON.parse(localStorage.getItem('groceryRequests')) || [];
+    const container = document.getElementById('continut');
+    container.innerHTML = "";
+    
+   
+    markers.forEach(m => dashMap.removeLayer(m));
+    markers = [];
+
+    cereri.forEach((c, index) => {
+        const isUrgent = c.tip === "În persoană";
         
-        markers.forEach(m => dashMap.removeLayer(m));
-        markers = [];
+        
+        container.innerHTML += `
+            <div class="card ${isUrgent ? 'urgent' : ''}">
+                <strong>${c.nume} (${c.varsta} ani)</strong> <small>la ora ${c.ora}</small><br>
+                <a href="tel:${c.tel}" class="tel-link">📞 ${c.tel}</a><br>
+                <b>Tip ajutor:</b> ${c.tip}<br>
+                ${isUrgent ? `<div style="background:#f1f5f9;padding:5px;margin:5px 0;border-radius:5px;">${c.detalii}</div>` : ''}
+                <p style="font-size:0.8rem; color: #64748b;">📍 ${c.adresa}</p>
+                <button class="btn-done" onclick="rezolva(${index})">Marchează ca Rezolvat</button>
+            </div>
+        `;
 
-        cereri.forEach((c, index) => {
-            const isUrgent = c.tip === "În persoană";
-            container.innerHTML += `
-                <div class="card ${isUrgent ? 'urgent' : ''}">
-                    <strong>${c.nume}</strong> <small>(${c.ora})</small><br>
-                    <a href="tel:${c.tel}" class="tel-link">📞 ${c.tel}</a><br>
-                    <b>Tip:</b> ${c.tip}<br>
-                    ${isUrgent ? `<div style="background:#f1f5f9;padding:5px;margin:5px 0;">${c.detalii}</div>` : ''}
-                    <p style="font-size:0.8rem">📍 ${c.adresa}</p>
-                    <button class="btn-done" onclick="rezolva(${index})">Rezolvat</button>
-                </div>
-            `;
-
-            if(c.coords) {
-                const l = c.coords.split(",");
-                const m = L.marker([l[0], l[1]]).addTo(dashMap)
-                           .bindPopup(`<b>Cerere: ${c.nume}</b><br>${c.detalii}`);
-                markers.push(m);
-            }
-        });
-    }
+        
+        if(c.coords) {
+            const l = c.coords.split(",");
+            const m = L.marker([l[0], l[1]]).addTo(dashMap)
+                       .bindPopup(`<b>${c.nume} (${c.varsta} ani)</b><br>${c.detalii}`);
+            markers.push(m);
+        }
+    });
+}
 
     function rezolva(index) {
         let cereri = JSON.parse(localStorage.getItem('groceryRequests')) || [];

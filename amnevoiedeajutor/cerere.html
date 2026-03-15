@@ -109,6 +109,9 @@
         <label>Număr de Telefon:</label>
         <input type="tel" id="telefon" placeholder="Ex: 0722 000 000">
 
+        <label for="varsta">Vârsta dumneavoastră:</label>
+        <input type="number" id="varsta" placeholder="Ex: 75" min="1" max="120" style="width: 100%; padding: 12px; margin-bottom: 20px; border: 2px solid #27ae60; border-radius: 10px; box-sizing: border-box;">
+
         <label>Cum dorești să fii ajutat?</label>
         <select id="tipAjutor" onchange="toggleSectiune()">
             <option value="">-- Alege o variantă --</option>
@@ -228,24 +231,29 @@ Urmărește-ne pe instagram la @lu._.ca01</p>
         }
 
         function trimiteCerere() {
-            const nume = document.getElementById('nume').value;
-            const tel = document.getElementById('telefon').value;
-            const tip = document.getElementById('tipAjutor').value;
-            if(!nume || !tel || !tip) return alert("Completează datele de contact!");
+     const nume = document.getElementById('nume').value;
+     const tel = document.getElementById('telefon').value;
+     const varsta = document.getElementById('varsta').value;
+     const tip = document.getElementById('tipAjutor').value;
+    
+     if(!nume || !tel || !tip || !varsta) return alert("Completează toate datele, inclusiv vârsta!");
 
-            const cereri = JSON.parse(localStorage.getItem('groceryRequests')) || [];
-            cereri.push({
-                nume, tel, tip,
-                detalii: document.getElementById('detaliiAjutor').value || "N/A",
-                adresa: document.getElementById('adresaText').value || "Telefonic",
-                coords: coords,
-                ora: new Date().toLocaleTimeString('ro-RO', {hour: '2-digit', minute:'2-digit'})
-            });
-            localStorage.setItem('groceryRequests', JSON.stringify(cereri));
-            alert("Cerere trimisă!");
-            location.reload();
-        }
-       function detecteazaLocatia() {
+     const cereri = JSON.parse(localStorage.getItem('groceryRequests')) || [];
+     cereri.push({
+        nume, 
+        tel, 
+        tip,
+        varsta,
+        detalii: document.getElementById('detaliiAjutor').value || "N/A",
+        adresa: document.getElementById('adresaText').value || "Telefonic",
+        coords: coords,
+        ora: new Date().toLocaleTimeString('ro-RO', {hour: '2-digit', minute:'2-digit'})
+    });
+    localStorage.setItem('groceryRequests', JSON.stringify(cereri));
+    alert("Cerere trimisă cu succes!");
+    location.reload();
+}
+    function detecteazaLocatia() {
     if (!navigator.geolocation) {
         alert("Geolocația nu este suportată de browserul tău.");
         return;
