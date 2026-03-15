@@ -125,6 +125,9 @@
 
             <label>Caută adresa sau apasă pe hartă:</label>
             <input type="text" id="adresaText" placeholder="Scrie strada și numărul">
+            <button type="button" onclick="detecteazaLocatia()" style="width: 100%; background: #27ae60; color: white; padding: 10px; border-radius: 10px; border: none; margin-bottom: 10px; cursor: pointer; font-weight: bold;">
+    📍 Detectează locația mea automată
+            </button>
             <div id="map"></div>
         </div>
 
@@ -242,6 +245,43 @@ Urmărește-ne pe instagram la @lu._.ca01</p>
             alert("Cerere trimisă!");
             location.reload();
         }
+        function detecteazaLocatia() {
+    if (!navigator.geolocation) {
+        alert("Geolocația nu este suportată de browserul tău.");
+        return;
+    }
+
+    // Afișăm un mesaj de așteptare
+    const btn = event.currentTarget;
+    const originalText = btn.innerText;
+    btn.innerText = "Se caută locația...";
+
+    navigator.geolocation.getCurrentPosition(
+        (position) => {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+
+            // Actualizăm harta și markerul
+            map.setView([lat, lon], 16);
+            plaseazaMarker(lat, lon, true);
+
+            // Opțional: Căutăm numele adresei folosind coordonatele (Reverse Geocoding)
+            fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.display_name) {
+                        document.getElementById('adresaText').value = data.display_name;
+                    }
+                });
+            
+            btn.innerText = originalText;
+        },
+        (error) => {
+            alert("Nu am putut accesa locația. Te rugăm să bifezi manual pe hartă.");
+            btn.innerText = originalText;
+        }
+    );
+}
     </script>
        <script>
     
