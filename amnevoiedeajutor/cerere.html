@@ -251,7 +251,7 @@ Urmărește-ne pe instagram la @lu._.ca01</p>
         return;
     }
 
-    // Identificăm butonul pentru a-i schimba textul temporar
+    
     const btn = event.currentTarget;
     const originalText = btn.innerText;
     btn.innerText = "🔍 Se caută adresa...";
@@ -261,27 +261,27 @@ Urmărește-ne pe instagram la @lu._.ca01</p>
             const lat = position.coords.latitude;
             const lon = position.coords.longitude;
 
-            // 1. Mutăm harta și punem markerul
+            
             map.setView([lat, lon], 16);
-            plaseazaMarker(lat, lon, false); // false pentru a nu face fetch dublu
+            plaseazaMarker(lat, lon, false); 
 
-            // 2. REVERSE GEOCODING: Transformăm coordonatele în nume de stradă
-            // Folosim serviciul gratuit Nominatim (OpenStreetMap)
+            
+            
             fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`)
                 .then(res => res.json())
                 .then(data => {
                     if (data.address) {
-                        // Extragem strada și numărul, dacă există
+                       
                         const strada = data.address.road || "";
                         const numar = data.address.house_number || "";
                         const oras = data.address.city || data.address.town || data.address.village || "";
                         
                         const adresaCompleta = `${strada}${numar ? ' nr. ' + numar : ''}${oras ? ', ' + oras : ''}`;
                         
-                        // UMPLEM AUTOMAT FIELD-UL DE ADRESĂ
+                     
                         document.getElementById('adresaText').value = adresaCompleta;
                         
-                        // Actualizăm și variabila globală de coordonate pentru trimiterea cererii
+                      
                         coords = lat.toFixed(4) + ", " + lon.toFixed(4);
                     }
                     btn.innerText = originalText;
@@ -295,9 +295,9 @@ Urmărește-ne pe instagram la @lu._.ca01</p>
             alert("Nu am putut accesa locația. Te rugăm să verifici permisiunile browserului.");
             btn.innerText = originalText;
         },
-        { enableHighAccuracy: true } // Forțăm GPS-ul pentru precizie maximă
+        { enableHighAccuracy: true } 
     );
-}
+}       
     </script>
        <script>
     
