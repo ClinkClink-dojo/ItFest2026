@@ -12,7 +12,8 @@
         
         body { font-family: 'Segoe UI', sans-serif;
          background: #fff7ed;
-         padding: 20px;
+         padding: 0;
+         margin:0;
          color: #2d3436; }
         
        
@@ -129,7 +130,22 @@
 
         <button class="main-btn" onclick="trimiteCerere()">Trimite Cererea</button>
     </div>
+ <footer class="site-footer">
+        <p><b>Centrul de Suport Seniori</b><br>
+Oferim soluții integrate de asistență<br>
+ și suport emoțional pentru persoanele vârstnice.</p>
+ <p><b><a href="../pagini-navbar/aboutus.html" style="color: whitesmoke;">About Us</a></b><br>
 
+<p><b>Program de Lucru</b><br>
+
+Luni - Vineri: 08:00 - 18:00<br>
+Sambata - Duminica: 8:00 - 16:00<br>
+Urgențe: Disponibilitate 24/7<br>
+
+Urmărește-ne pe instagram la @lu._.ca01</p>
+<div id="footer-map"></div>
+    </footer>
+ 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
         // --- LOGICA PENTRU DICTARE VOCALĂ (AI) ---
@@ -227,6 +243,20 @@
             location.reload();
         }
     </script>
-    
+       <script>
+    // Folosim un nume diferit pentru harta din footer ca să nu se bată cu cea din formular
+    var footerCoords = [45.7685, 21.2465]; 
+    var fMap = L.map('footer-map', {
+        scrollWheelZoom: false 
+    }).setView(footerCoords, 16);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap'
+    }).addTo(fMap);
+
+    L.marker(footerCoords).addTo(fMap)
+        .bindPopup("<b>Sediul SeniorLink</b><br>Strada Răsăritului Nr. 4, Timișoara")
+        .openPopup(); 
+</script>
 </body>
 </html>

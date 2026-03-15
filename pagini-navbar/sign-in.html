@@ -8,23 +8,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Portal Voluntari</title>
 <style>
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-
-    min-height: 100vh; 
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    
-
-    background-attachment: fixed; 
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    
-    transition: background-image 1s ease-in-out;
-    background-color: #333; 
+body{
+font-family: Arial, sans-serif;
+margin:0;
+height:100vh;
+display:flex;
+flex-direction: column;
+justify-content: space-between;
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+transition:background-image 1s ease-in-out;
 }
 
 .overlay{
@@ -53,13 +47,12 @@ text-align:center;
 margin-bottom:15px;
 }
 
-input {
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box; 
+input{
+width:100%;
+padding:10px;
+margin:8px 0;
+border:1px solid #ccc;
+border-radius:5px;
 }
 
 button{
@@ -84,11 +77,11 @@ margin-bottom:40px;
 </style>
 </head>
 <body>
-     <nav class="navbar">
+<nav class="navbar">
     <div class="nav-container">
         <ul> 
             <li><a href="../home/homepage.html" class="nav-link-home">Home</a></li>
-            <li><a href="#" class="nav-link-signin">Sign In</a></li>
+            <li><a href="../pagini-navbar/contact.html" class="nav-link-signin">Sign In</a></li>
         </ul>
     </div>
 </nav>
@@ -97,6 +90,7 @@ margin-bottom:40px;
 
 <div class="container">
 
+<!-- FORMULAR INREGISTRARE -->
 <div class="section">
 <h2>Înregistrare Voluntar</h2>
 <form onsubmit="signupVolunteer(event)">
@@ -112,7 +106,7 @@ margin-bottom:40px;
 </form>
 </div>
 
-
+<!-- FORMULAR LOGIN -->
 <div class="section">
 <h2>Autentificare Voluntar</h2>
 <form onsubmit="loginVolunteer(event)">
@@ -122,7 +116,8 @@ margin-bottom:40px;
 </form>
 </div>
 </div>
- <footer class="site-footer">
+
+    <footer class="site-footer">
         <p><b>Centrul de Suport Seniori</b><br>
 Oferim soluții integrate de asistență<br>
  și suport emoțional pentru persoanele vârstnice.</p>
@@ -137,25 +132,6 @@ Urgențe: Disponibilitate 24/7<br>
 Urmărește-ne pe instagram la @lu._.ca01</p>
 <div id="footer-map"></div>
     </footer>
-    <script>
-        
-        var locatiaSediu = [45.7685, 21.2465]; 
-
-        var map = L.map('footer-map', {
-            scrollWheelZoom: false 
-        }).setView(locatiaSediu, 16);
-
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap'
-        }).addTo(map);
-
-        
-        L.marker(locatiaSediu).addTo(map)
-            .bindPopup("<b>Sediul Ajutorul Seniorului</b><br>Strada Răsăritului Nr. 4, Timișoara")
-            .openPopup(); 
-</script>
-
-    
 
 <script>
 const images = [
@@ -184,6 +160,23 @@ event.preventDefault();
 alert("Cont creat! Acum te poți autentifica.");
 }
 </script>
+<script>
+        
+        var locatiaSediu = [45.7685, 21.2465]; 
 
+        var map = L.map('footer-map', {
+            scrollWheelZoom: false 
+        }).setView(locatiaSediu, 16);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        
+        L.marker(locatiaSediu).addTo(map)
+            .bindPopup("<b>Sediul Ajutorul Seniorului</b><br>Strada Răsăritului Nr. 4, Timișoara")
+            .openPopup(); 
+
+    </script>
 </body>
 </html>
