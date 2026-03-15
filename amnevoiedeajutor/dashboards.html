@@ -119,9 +119,8 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-    // --- GAMIFICATION LOGIC ---
-    const MAX_XP = 5; // Misiuni necesare per nivel
-
+    
+    const MAX_XP = 5; 
     function actualizeazaStatistici() {
         let xp = parseInt(localStorage.getItem('volunteerXP')) || 0;
         let nivel = Math.floor(xp / MAX_XP) + 1;
@@ -139,13 +138,12 @@
     let noulXP = xp + 1;
     localStorage.setItem('volunteerXP', noulXP);
     
-    // Calculăm nivelul după adăugarea XP-ului
     let nivelNou = Math.floor(noulXP / MAX_XP) + 1;
 
-    // Verificăm dacă a trecut de nivelul 3
+    
     if (nivelNou >= 4) {
         alert("Felicitări! Ai demonstrat un devotament incredibil. Te redirecționăm către pagina Despre Noi!");
-        // Pune aici link-ul tău către pagina despre noi
+        
         window.location.href = "../pagini-navbar/aboutus.html"; 
     } else {
         actualizeazaStatistici();
@@ -222,12 +220,12 @@
         cereri.splice(index, 1);
         localStorage.setItem('groceryRequests', JSON.stringify(cereri));
         
-        // Gamification trigger
+        
         adaugaXP();
         randeaza();
     }
 
-    // Inițializare la încărcare
+    
     actualizeazaStatistici();
     setInterval(randeaza, 4000);
     randeaza();

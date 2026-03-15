@@ -148,7 +148,7 @@ Urmărește-ne pe instagram la @lu._.ca01</p>
  
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-        // --- LOGICA PENTRU DICTARE VOCALĂ (AI) ---
+       
         function startDictare() {
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             if (!SpeechRecognition) {
@@ -167,7 +167,7 @@ Urmărește-ne pe instagram la @lu._.ca01</p>
             recognition.start();
         }
 
-        // --- LOGICA EXISTENTĂ PENTRU HARTĂ ȘI FORMULAR ---
+        
         let map, marker, coords = "";
 
         function toggleSectiune() {
@@ -244,7 +244,7 @@ Urmărește-ne pe instagram la @lu._.ca01</p>
         }
     </script>
        <script>
-    // Folosim un nume diferit pentru harta din footer ca să nu se bată cu cea din formular
+    
     var footerCoords = [45.7685, 21.2465]; 
     var fMap = L.map('footer-map', {
         scrollWheelZoom: false 

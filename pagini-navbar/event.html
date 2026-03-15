@@ -178,7 +178,7 @@ function displayEvents() {
     events.forEach((event, index) => {
         const eventItem = document.createElement('div');
         eventItem.className = 'event-item';
-        // Am adăugat un buton mic (X) poziționat în dreapta
+        
         eventItem.innerHTML = `
             <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                 <div>
@@ -195,17 +195,16 @@ function displayEvents() {
 function deleteEvent(index) {
     let events = JSON.parse(localStorage.getItem('events')) || [];
     
-    // Eliminăm elementul de la poziția respectivă
+    
     events.splice(index, 1);
     
-    // Salvăm lista actualizată înapoi în localStorage
+    
     localStorage.setItem('events', JSON.stringify(events));
     
-    // Re-afișăm lista
+    
     displayEvents();
 }
 
-// Load events on page load
 displayEvents();
 </script>
     <footer class="site-footer">
