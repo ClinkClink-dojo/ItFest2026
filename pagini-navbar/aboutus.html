@@ -16,7 +16,7 @@
     <div class="nav-container">
         <ul> 
             <li><a href="../home/homepage.html" class="nav-link-home">Home</a></li>
-            <li><a href="./sign-in.html" class="nav-link-signin">Sign In</a></li>
+            <li><a href="../pagini-navbar/contact.html" class="nav-link-signin">Sign In</a></li>
         </ul>
     </div>
 </nav>
@@ -49,38 +49,6 @@
         <a href="mailto:mrcalientos@gmail.com" class="email-link">mrcalientos@gmail.com</a>
     </div>
 </div>
-    <footer class="site-footer">
-        <p><b>Centrul de Suport Seniori</b><br>
-Oferim soluții integrate de asistență<br>
- și suport emoțional pentru persoanele vârstnice.</p>
- <p><b>About Us</b><br>
-
-<p><b>Program de Lucru</b><br>
-
-Luni - Vineri: 08:00 - 18:00<br>
-Sambata - Duminica: 8:00 - 16:00<br>
-Urgențe: Disponibilitate 24/7<br>
-
-Urmărește-ne pe instagram la @lu._.ca01</p>
-<div id="footer-map"></div>
-    </footer>
-    <script>
-        
-        var locatiaSediu = [45.7685, 21.2465]; 
-
-        var map = L.map('footer-map', {
-            scrollWheelZoom: false 
-        }).setView(locatiaSediu, 16);
-
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap'
-        }).addTo(map);
-
-        
-        L.marker(locatiaSediu).addTo(map)
-            .bindPopup("<b>Sediul Ajutorul Seniorului</b><br>Strada Răsăritului Nr. 4, Timișoara")
-            .openPopup(); 
-
-    </script>
+ 
 </body>
 </html>
