@@ -78,3 +78,31 @@
         font-size: 14px;
     }
 }
+
+.site-footer {
+    background: rgba(44, 62, 80, 0.95);
+    color: #f1f2f6;
+    padding: 40px 20px;
+    font-size: 14px;
+    display: flex;             
+    justify-content: center;   
+    gap: 40px;                 
+    flex-wrap: wrap;           
+}
+
+
+#footer-map {
+    width: 400px;
+    height: 250px;
+    border-radius: 15px;
+    border: 3px solid #27ae60; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    z-index: 1; 
+}
+
+
+@media (max-width: 768px) {
+    #footer-map {
+        width: 100%; 
+    }
+}

@@ -55,9 +55,38 @@
                 });
         });
     </script>
-</body>
-</html>
-</body>
-</html>
+    <footer class="site-footer">
+        <p><b>Centrul de Suport Seniori</b><br>
+Oferim soluții integrate de asistență<br>
+ și suport emoțional pentru persoanele vârstnice.</p>
+ <p><b><a href="./aboutus.html" style="color: whitesmoke;">About Us</a></b><br>
+
+<p><b>Program de Lucru</b><br>
+
+Luni - Vineri: 08:00 - 18:00<br>
+Sambata - Duminica: 8:00 - 16:00<br>
+Urgențe: Disponibilitate 24/7<br>
+
+Urmărește-ne pe instagram la @lu._.ca01</p>
+<div id="footer-map"></div>
+    </footer>
+    <script>
+        
+        var locatiaSediu = [45.7685, 21.2465]; 
+
+        var map2 = L.map('footer-map', {
+            scrollWheelZoom: false 
+        }).setView(locatiaSediu, 16);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap'
+        }).addTo(map2);
+
+        
+        L.marker(locatiaSediu).addTo(map2)
+            .bindPopup("<b>Sediul Ajutorul Seniorului</b><br>Strada Răsăritului Nr. 4, Timișoara")
+            .openPopup(); 
+
+    </script>
 </body>
 </html>

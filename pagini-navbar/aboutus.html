@@ -4,13 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AboutUs</title>
+    <link rel="stylesheet" href="design.css">
     <link rel="stylesheet" href="./aboutus.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body style="font-family:Arial,sans-serif;">
+    <nav class="navbar">
+    <div class="nav-container">
+        <ul> 
+            <li><a href="../home/homepage.html" class="nav-link-home">Home</a></li>
+            <li><a href="./sign-in.html" class="nav-link-signin">Sign In</a></li>
+        </ul>
+    </div>
+</nav>
     <div class="div-intro mission-container">
-    <h2 style="font-family:Arial,sans-serif;">Misiunea SeniorLink: Conectăm Generații</h2>
+        <br><br>
+    <h2 style="font-family:Arial,sans-serif;">Misiunea SeniorLink:<br> Conectăm Generații</h2>
+     <br><br>
     <p>
         <b>SeniorLink</b> nu este doar o aplicație, ci un pod digital între dorința de a ajuta și nevoia de sprijin. Misiunea noastră este să eliminăm izolarea socială a seniorilor prin tehnologie intuitivă și implicare comunitară. 
     </p>
@@ -36,5 +49,38 @@
         <a href="mailto:mrcalientos@gmail.com" class="email-link">mrcalientos@gmail.com</a>
     </div>
 </div>
+    <footer class="site-footer">
+        <p><b>Centrul de Suport Seniori</b><br>
+Oferim soluții integrate de asistență<br>
+ și suport emoțional pentru persoanele vârstnice.</p>
+ <p><b>About Us</b><br>
+
+<p><b>Program de Lucru</b><br>
+
+Luni - Vineri: 08:00 - 18:00<br>
+Sambata - Duminica: 8:00 - 16:00<br>
+Urgențe: Disponibilitate 24/7<br>
+
+Urmărește-ne pe instagram la @lu._.ca01</p>
+<div id="footer-map"></div>
+    </footer>
+    <script>
+        
+        var locatiaSediu = [45.7685, 21.2465]; 
+
+        var map = L.map('footer-map', {
+            scrollWheelZoom: false 
+        }).setView(locatiaSediu, 16);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        
+        L.marker(locatiaSediu).addTo(map)
+            .bindPopup("<b>Sediul Ajutorul Seniorului</b><br>Strada Răsăritului Nr. 4, Timișoara")
+            .openPopup(); 
+
+    </script>
 </body>
 </html>

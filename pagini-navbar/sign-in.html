@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8" />
  <link rel="stylesheet" href="design.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Portal Voluntari</title>
 <style>
@@ -11,9 +13,8 @@ font-family: Arial, sans-serif;
 margin:0;
 height:100vh;
 display:flex;
-justify-content:center;
-align-items:flex-start;
-padding-top:40px;
+flex-direction: column;
+justify-content: space-between;
 background-size:cover;
 background-position:center;
 background-repeat:no-repeat;
@@ -38,6 +39,7 @@ padding:30px;
 border-radius:10px;
 box-shadow:0 4px 10px rgba(0,0,0,0.2);
 width:320px;
+margin: 40px auto 0;
 }
 
 h2{
@@ -49,7 +51,7 @@ input{
 width:100%;
 padding:10px;
 margin:8px 0;
-border:1px solid #ccc;z
+border:1px solid #ccc;
 border-radius:5px;
 }
 
@@ -78,7 +80,7 @@ margin-bottom:40px;
 <nav class="navbar">
     <div class="nav-container">
         <ul> 
-            <li><a href="./homepage.html" class="nav-link-home">Home</a></li>
+            <li><a href="../home/homepage.html" class="nav-link-home">Home</a></li>
             <li><a href="../pagini-navbar/contact.html" class="nav-link-signin">Sign In</a></li>
         </ul>
     </div>
@@ -113,8 +115,23 @@ margin-bottom:40px;
 <button type="submit">Autentificare</button>
 </form>
 </div>
-
 </div>
+
+    <footer class="site-footer">
+        <p><b>Centrul de Suport Seniori</b><br>
+Oferim soluții integrate de asistență<br>
+ și suport emoțional pentru persoanele vârstnice.</p>
+ <p><b><a href="../pagini-navbar/aboutus.html" style="color: whitesmoke;">About Us</a></b><br>
+
+<p><b>Program de Lucru</b><br>
+
+Luni - Vineri: 08:00 - 18:00<br>
+Sambata - Duminica: 8:00 - 16:00<br>
+Urgențe: Disponibilitate 24/7<br>
+
+Urmărește-ne pe instagram la @lu._.ca01</p>
+<div id="footer-map"></div>
+    </footer>
 
 <script>
 const images = [
@@ -143,6 +160,23 @@ event.preventDefault();
 alert("Cont creat! Acum te poți autentifica.");
 }
 </script>
+<script>
+        
+        var locatiaSediu = [45.7685, 21.2465]; 
 
+        var map = L.map('footer-map', {
+            scrollWheelZoom: false 
+        }).setView(locatiaSediu, 16);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        
+        L.marker(locatiaSediu).addTo(map)
+            .bindPopup("<b>Sediul Ajutorul Seniorului</b><br>Strada Răsăritului Nr. 4, Timișoara")
+            .openPopup(); 
+
+    </script>
 </body>
 </html>
